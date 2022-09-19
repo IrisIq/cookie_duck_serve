@@ -5,4 +5,5 @@ export class PostDataDto{
 
 export class GetDataDto {
   id: string;
+  key:string;
 }

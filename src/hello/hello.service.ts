@@ -4,6 +4,8 @@ import { PostDataDto } from './dto/hello.dto';
 @Injectable()
 export class HelloService {
   getHello(id: string): string {
+    console.log(id);
+    
     // 这里可以进行数据哭的相关操作，最后将需要返回的数据return出去
     return `hello GET 参数id:${id}`;
   }

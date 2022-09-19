@@ -8,6 +8,8 @@ import {
   Put,
   Param,
   Delete,
+  HttpCode,
+  Header
 } from '@nestjs/common';
 import { GetDataDto, PostDataDto } from './dto/hello.dto';
 import { HelloService } from './hello.service';
@@ -19,8 +21,9 @@ export class HelloController {
   // get请求
   @Get('')
   fetch(@Query() params: GetDataDto, @Headers('token') token): string {
-    console.log(token);
-    return this.helloService.getHello(params.id);
+    // console.log(token);
+    console.log(params)
+    return this.helloService.getHello(params.key);
   }
 
   // post请求
@@ -39,5 +42,14 @@ export class HelloController {
   @Delete()
   remove(@Query() { id }): string {
     return this.helloService.removeHello(id);
+  }
+
+  @Get('hi')
+  @HttpCode(203)
+  @Header('Cache-Control', 'none')
+  fetchh(@Query() params: GetDataDto, @Headers('token') token:string): string {
+    console.log(token);
+    console.log(params)
+    return this.helloService.getHello(params.key);
   }
 }
