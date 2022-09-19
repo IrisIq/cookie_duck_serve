@@ -1,19 +1,43 @@
-import { Injectable } from '@nestjs/common';
-import { PostDataDto } from './dto/hello.dto';
+import {
+  Controller,
+  Get,
+  Query,
+  Headers,
+  Post,
+  Body,
+  Put,
+  Param,
+  Delete,
+} from '@nestjs/common';
+import { GetDataDto, PostDataDto } from './dto/hello.dto';
+import { HelloService } from './hello.service';
 
-@Injectable()
-export class HelloService {
-  getHello(id: string): string {
-    // 这里可以进行数据哭的相关操作，最后将需要返回的数据return出去
-    return `hello GET 参数id:${id}`;
+@Controller('/hello')
+export class HelloController {
+  constructor(private readonly helloService: HelloService) {}
+
+  // get请求
+  @Get('')
+  fetch(@Query() params: GetDataDto, @Headers('token') token): string {
+    console.log(token);
+    return this.helloService.getHello(params.id);
   }
-  postHello(data: PostDataDto) {
-    return `hello POST 参数code:${data.code};name:${data.name}`;
+
+  // post请求
+  @Post()
+  save(@Body() data: PostDataDto) {
+    return this.helloService.postHello(data);
   }
-  updateHello(id: string, message: string): string {
-    return `hello Patch 参数id:${id};message:${message}`;
+
+  // put请求
+  @Put(':id')
+  update(@Param() { id }, @Body() { message }): string {
+    return this.helloService.updateHello(id, message);
   }
-  removeHello(id: number): string {
-    return `hello delete 参数id:${id}`;
+
+  // delete请求
+  @Delete()
+  remove(@Query() { id }): string {
+    return this.helloService.removeHello(id);
   }
 }
