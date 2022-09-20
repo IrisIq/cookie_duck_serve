@@ -9,7 +9,10 @@ import {
   Param,
   Delete,
   HttpCode,
-  Header
+  Header,
+  HttpException,
+  HttpStatus,
+  UnsupportedMediaTypeException,
 } from '@nestjs/common';
 import { GetDataDto, PostDataDto } from './dto/hello.dto';
 import { HelloService } from './hello.service';
@@ -21,9 +24,18 @@ export class HelloController {
   // get请求
   @Get('')
   fetch(@Query() params: GetDataDto, @Headers('token') token): string {
-    // console.log(token);
-    console.log(params)
-    return this.helloService.getHello(params.key);
+    if (params.key) {
+      return this.helloService.getHello(params.key);
+    }
+    // throw new HttpException('你没有传key', 999);
+    throw new HttpException(
+      {
+        status: 999,
+        error: 'This is a custom message',
+        outher: '草泥马，不知道传key吗杀千刀的',
+      },
+      405,
+    );
   }
 
   // post请求
@@ -47,9 +59,9 @@ export class HelloController {
   @Get('hi')
   @HttpCode(203)
   @Header('Cache-Control', 'none')
-  fetchh(@Query() params: GetDataDto, @Headers('token') token:string): string {
+  fetchh(@Query() params: GetDataDto, @Headers('token') token: string): string {
     console.log(token);
-    console.log(params)
+    console.log(params);
     return this.helloService.getHello(params.key);
   }
 }
