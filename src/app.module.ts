@@ -1,24 +1,39 @@
 import { Module } from '@nestjs/common';
-import { HelloModule } from './hello/hello.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { NestModule } from './diet-management-tools/nest/nest.module';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+// 配置文件
+import envConfig from '../config/env';
+// 模块
+import { HelloModule } from './hello/hello.module';
 import { UserModule } from './user/user.module';
+import { FoodModule } from './instrument/food/food.module';
+import { ArticleModule } from './article/article.module';
 
 @Module({
   imports: [
-    HelloModule,
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: '123456789',
-      database: 'cookieDuck',
-      entities: [],
-      synchronize: true,
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: [envConfig.path],
     }),
-    NestModule,
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: async (configService: ConfigService) => ({
+        type: 'mysql',
+        host: configService.get('DB_HOST', 'localhost'),
+        port: configService.get<number>('DB_PORT', 3306),
+        username: configService.get('DB_USER', 'root'),
+        password: configService.get('DB_PASSWORD', '123456789'),
+        database: configService.get('DB_DATABASE', 'cookieDuck'),
+        entities: [],
+        timezone: '+08:00', //服务器上配置的时区
+        synchronize: true, //根据实体自动创建数据库表， 生产环境建议关闭
+      }),
+    }),
+    HelloModule,
     UserModule,
+    FoodModule,
+    ArticleModule,
   ],
   controllers: [],
   providers: [],
