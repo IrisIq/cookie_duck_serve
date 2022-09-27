@@ -1,7 +1,7 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('article')
-export class PostsEntity {
+export class ArticlEntity {
   @PrimaryGeneratedColumn()
   id: number; // 标记为主列，值自动生成
 
