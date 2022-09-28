@@ -1,6 +1,6 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { getRepository, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 import { ArticlEntity } from './article.entity';
 
 export interface ArticleRo {
@@ -28,9 +28,11 @@ export class ArticleService {
 
   // 获取文章列表
   async findAll(query): Promise<ArticleRo> {
-    const qb = await getRepository(ArticlEntity).createQueryBuilder('articl');
+    const qb = await this.articlesRepository.createQueryBuilder('articl');
+    console.log(qb);
+
     qb.where('1 = 1');
-    qb.orderBy('post.create_time', 'DESC');
+    // qb.orderBy('post.create_time', 'DESC');
 
     const count = await qb.getCount();
     const { pageNum = 1, pageSize = 10, ...params } = query;
