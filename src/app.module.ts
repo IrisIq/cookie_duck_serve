@@ -10,6 +10,7 @@ import { FoodModule } from './instrument/food/food.module';
 import { ArticleModule } from './article/article.module';
 
 import { ArticlEntity } from './article/article.entity';
+import { FoodEntity } from './instrument/food/entities/food.entity';
 
 @Module({
   imports: [
@@ -27,7 +28,7 @@ import { ArticlEntity } from './article/article.entity';
         username: configService.get('DB_USER', 'root'),
         password: configService.get('DB_PASSWORD', '123456789'),
         database: configService.get('DB_DATABASE', 'cookieDuck'),
-        entities: [ArticlEntity],
+        entities: [ArticlEntity, FoodEntity],
         timezone: '+08:00', //服务器上配置的时区
         synchronize: true, //根据实体自动创建数据库表， 生产环境建议关闭
       }),

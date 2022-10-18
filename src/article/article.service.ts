@@ -14,6 +14,7 @@ export class ArticleService {
     private readonly articlesRepository: Repository<ArticlEntity>,
   ) {}
 
+  // 创建文章
   async create(post: Partial<ArticlEntity>): Promise<ArticlEntity> {
     const { title } = post;
     if (!title) {
@@ -28,8 +29,8 @@ export class ArticleService {
 
   // 获取文章列表
   async findAll(query): Promise<ArticleRo> {
+    console.log(query);
     const qb = await this.articlesRepository.createQueryBuilder('articl');
-    console.log(qb);
 
     qb.where('1 = 1');
     // qb.orderBy('post.create_time', 'DESC');
@@ -40,6 +41,8 @@ export class ArticleService {
     qb.offset(pageSize * (pageNum - 1));
 
     const posts = await qb.getMany();
+    console.log(posts);
+
     return { list: posts, count: count };
   }
 

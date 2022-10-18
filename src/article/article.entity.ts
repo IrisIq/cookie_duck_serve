@@ -5,19 +5,22 @@ export class ArticlEntity {
   @PrimaryGeneratedColumn()
   id: number; // 标记为主列，值自动生成
 
+  // 标题
   @Column({ length: 50 })
   title: string;
 
+  // 作者
   @Column({ length: 20 })
   author: string;
 
+  // 内容
   @Column('text')
   content: string;
 
-  // @Column({ default: '' })
-  // thumb_url: string;
+  @Column({ type: 'text', default: null })
+  img_url: string;
 
-  @Column('tinyint')
+  @Column({ type: 'tinyint', default: null })
   type: number;
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
