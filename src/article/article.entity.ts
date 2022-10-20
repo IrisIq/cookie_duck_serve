@@ -20,7 +20,7 @@ export class ArticlEntity {
   @Column({ type: 'text', default: null })
   img_url: string;
 
-  @Column({ type: 'tinyint', default: null })
+  @Column({ type: 'text', default: null })
   type: number;
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
