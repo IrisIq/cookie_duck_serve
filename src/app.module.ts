@@ -4,7 +4,6 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 // 配置文件
 import envConfig from '../config/env';
 // 模块
-import { HelloModule } from './hello/hello.module';
 import { UserModule } from './user/user.module';
 import { FoodModule } from './instrument/food/food.module';
 import { ArticleModule } from './article/article.module';
@@ -33,7 +32,6 @@ import { FoodEntity } from './instrument/food/entities/food.entity';
         synchronize: true, //根据实体自动创建数据库表， 生产环境建议关闭
       }),
     }),
-    HelloModule,
     UserModule,
     FoodModule,
     ArticleModule,

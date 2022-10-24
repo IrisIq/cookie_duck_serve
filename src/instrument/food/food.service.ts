@@ -12,7 +12,7 @@ export class FoodService {
   ) {}
 
   // 添加
-  async addFood(post) {
+  async addFood(post: Partial<FoodEntity>) {
     console.log(post);
     console.log(this.FoodRepository);
 

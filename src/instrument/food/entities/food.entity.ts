@@ -7,28 +7,34 @@ export class FoodEntity {
   @PrimaryGeneratedColumn()
   food_id: number;
 
-  @Column({ type: 'tinyint', default: 0 })
+  @Column({ type: 'tinyint', default: 0, comment: '分类:0 未分类 ' })
   food_type: number; // 食物分类
 
-  @Column({ length: 255 })
+  @Column({ length: 60, comment: '名称' })
   food_name: string; // 食物名称
 
-  @Column({ length: 255 })
-  food_heat: string; // 热量
+  @Column({ type: 'decimal', precision: 10, scale: 2, comment: '热量' })
+  food_heat: number; // 热量
 
-  @Column({ length: 255 })
-  food_protein: string; //蛋白质
+  @Column({ type: 'decimal', precision: 10, scale: 2, comment: '蛋白质' })
+  food_protein: number;
 
-  @Column({ length: 255 })
-  food_fat: string; //脂肪
+  @Column({ type: 'decimal', precision: 10, scale: 2, comment: '脂肪' })
+  food_fat: number;
 
-  @Column({ length: 255 })
-  food_carbohydrate: string; // 碳水
+  @Column({ type: 'decimal', precision: 10, scale: 2, comment: '碳水' })
+  food_carbohydrate: number;
 
-  @Column({ type: 'double', default: '100' })
-  food_weight: string; // 每份重量
+  @Column({
+    type: 'double',
+    default: '100',
+    precision: 10,
+    scale: 2,
+    comment: '每份重量',
+  })
+  food_weight: number;
 
-  @Column({ type: 'text', default: null }) //图片
+  @Column({ type: 'text', nullable: true, comment: '图片' })
   food_img: string;
 
   // @Column({
