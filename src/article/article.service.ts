@@ -33,7 +33,7 @@ export class ArticleService {
     const qb = await this.articlesRepository.createQueryBuilder('articl');
 
     qb.where('1 = 1');
-    // qb.orderBy('post.create_time', 'DESC');
+    qb.orderBy('post.create_time', 'DESC');
 
     const count = await qb.getCount();
     const { pageNum = 1, pageSize = 10, ...params } = query;

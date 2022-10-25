@@ -10,6 +10,7 @@ import { ArticleModule } from './article/article.module';
 
 import { ArticlEntity } from './article/article.entity';
 import { FoodEntity } from './instrument/food/entities/food.entity';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -35,6 +36,7 @@ import { FoodEntity } from './instrument/food/entities/food.entity';
     UserModule,
     FoodModule,
     ArticleModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [],

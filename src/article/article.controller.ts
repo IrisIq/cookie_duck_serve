@@ -8,6 +8,7 @@ import {
   Post,
   Put,
   Query,
+  HttpCode,
 } from '@nestjs/common';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
 import { CreatePostDto } from './dto/artical.dto';
@@ -22,6 +23,7 @@ export class ArticleController {
    */
   @ApiTags('文章')
   @ApiOperation({ summary: '创建文章' })
+  @HttpCode(200)
   @Post()
   async create(@Body() post: CreatePostDto) {
     return await this.articleService.create(post);
