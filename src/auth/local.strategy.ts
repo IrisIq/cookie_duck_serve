@@ -5,12 +5,12 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { IStrategyOptions, Strategy } from 'passport-local';
 import { Repository } from 'typeorm';
 
-import { User } from 'src/user/entities/user.entity';
+import { UserEntity } from 'src/user/entities/user.entity';
 
 export class LocalStorage extends PassportStrategy(Strategy) {
   constructor(
-    @InjectRepository(User)
-    private readonly userRepository: Repository<User>,
+    @InjectRepository(UserEntity)
+    private readonly userRepository: Repository<UserEntity>,
   ) {
     super({
       usernameField: 'username',

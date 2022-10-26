@@ -22,6 +22,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
       data: {},
       message: message,
       code: -1,
+      success: false,
     };
 
     // 设置返回的状态码， 请求头，发送错误信息

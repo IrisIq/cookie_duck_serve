@@ -5,22 +5,22 @@ import { Exclude } from 'class-transformer';
 import * as bcrypt from 'bcryptjs';
 
 @Entity('user')
-export class User {
+export class UserEntity {
   @PrimaryGeneratedColumn('uuid')
   id: number;
 
   @Column({ length: 100, comment: '用户名' })
-  username: string; // 用户名
+  username: string;
 
   @Column({ length: 100, comment: '昵称' })
-  nickname: string; //昵称
+  nickname: string;
 
   // @Exclude()
   @Column({ select: false, comment: '密码' })
-  password: string; // 密码
+  password: string;
 
   @Column({ comment: '头像', nullable: true })
-  avatar: string; //头像
+  avatar: string;
 
   @Column({ comment: '邮箱' })
   email: string;
