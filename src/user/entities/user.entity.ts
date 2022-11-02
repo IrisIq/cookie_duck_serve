@@ -1,11 +1,20 @@
 // use/entities/user.entity.ts
-import { Column, Entity, PrimaryGeneratedColumn, BeforeInsert } from 'typeorm';
+import {
+  Column,
+  Entity,
+  PrimaryGeneratedColumn,
+  BeforeInsert,
+  OneToMany,
+} from 'typeorm';
 import { Exclude } from 'class-transformer';
+import { ArticlEntity } from 'src/article/article.entity';
+import { ApiProperty } from '@nestjs/swagger';
 
 import * as bcrypt from 'bcryptjs';
 
 @Entity('user')
 export class UserEntity {
+  @ApiProperty({ description: '用户id' })
   @PrimaryGeneratedColumn('uuid')
   id: number;
 
@@ -16,20 +25,24 @@ export class UserEntity {
   nickname: string;
 
   // @Exclude()
-  @Column({ select: false, comment: '密码' })
+  @Column({ type: 'varchar', length: 255, select: false, comment: '密码' })
   password: string;
 
   @Column({ comment: '头像', nullable: true })
   avatar: string;
 
-  @Column({ comment: '邮箱' })
+  @Column({ type: 'varchar', length: 255, comment: '邮箱' })
   email: string;
 
   @Column('simple-enum', {
     enum: ['root', 'author', 'visitor'],
+    default: 'visitor',
     comment: '用户角色',
   })
-  role: string; // 用户角色
+  role: string;
+
+  @OneToMany(() => ArticlEntity, (post) => post.author)
+  posts: ArticlEntity[];
 
   @Column({
     name: 'create_time',
@@ -47,8 +60,11 @@ export class UserEntity {
   })
   updateTime: Date;
 
-  @BeforeInsert()
-  async encryptPwd() {
-    this.password = await bcrypt.hashSync(this.password);
-  }
+  // 这里不能走
+  // @BeforeInsert()
+  // async encryptPwd() {
+  //   console.log(this.password);
+  //   if (!this.password) return;
+  //   this.password = await bcrypt.hashSync(this.password);
+  // }
 }

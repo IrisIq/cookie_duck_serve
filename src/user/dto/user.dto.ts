@@ -20,3 +20,13 @@ export class CreateUserDto {
   @ApiProperty({ description: '用户名' })
   role: string; // 用户角色
 }
+
+export class LoginrDto {
+  @ApiProperty({ description: '账号/用户名 or 邮箱' })
+  @IsNotEmpty({ message: '用户名必填' })
+  username: string; // 用户名
+
+  @ApiProperty({ description: '密码' })
+  @IsNotEmpty({ message: '密码必填' })
+  password: string; // 密码
+}

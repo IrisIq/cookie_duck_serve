@@ -5,7 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { IStrategyOptions, Strategy } from 'passport-local';
 import { Repository } from 'typeorm';
 
-import { UserEntity } from 'src/user/entities/user.entity';
+import { UserEntity } from '../user/entities/user.entity';
 
 export class LocalStorage extends PassportStrategy(Strategy) {
   constructor(
@@ -19,11 +19,15 @@ export class LocalStorage extends PassportStrategy(Strategy) {
   }
 
   async validate(username: string, password: string) {
+    console.log(1);
+
     const user = await this.userRepository
       .createQueryBuilder('user')
       .addSelect('user.password')
       .where('user.username=:username', { username })
       .getOne();
+
+    console.log('user', user);
 
     if (!user) {
       throw new BadRequestException('用户名不正确！');

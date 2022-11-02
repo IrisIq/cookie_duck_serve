@@ -31,7 +31,7 @@ import { UserEntity } from 'src/user/entities/user.entity';
         database: configService.get('DB_DATABASE', 'cookieDuck'),
         entities: [ArticlEntity, FoodEntity, UserEntity],
         timezone: '+08:00', //服务器上配置的时区
-        synchronize: true, //根据实体自动创建数据库表， 生产环境建议关闭
+        synchronize: false, //根据实体自动创建数据库表， 生产环境建议关闭
       }),
     }),
     UserModule,
