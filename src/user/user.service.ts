@@ -45,7 +45,7 @@ export class UserService {
     return account;
   }
 
-  async findOne(id) {
+  async getUser(id) {
     return '这里是auth服务引用的';
   }
 }

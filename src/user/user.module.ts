@@ -13,6 +13,6 @@ import { UserService } from './user.service';
   providers: [UserService, LocalStorage],
   // providers: [UserService],
 
-  exports: [UserService],
+  exports: [UserService, UserModule],
 })
 export class UserModule {}

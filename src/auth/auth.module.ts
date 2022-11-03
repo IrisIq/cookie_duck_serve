@@ -8,6 +8,7 @@ import { LocalStorage } from './local.strategy';
 import { JwtStorage } from './jwt.strategy';
 import { AuthService } from './auth.service';
 import { UserService } from './../user/user.service';
+import { UserModule } from './../user/user.module';
 
 const jwtModule = JwtModule.registerAsync({
   inject: [ConfigService],
@@ -20,8 +21,8 @@ const jwtModule = JwtModule.registerAsync({
 });
 
 @Module({
-  imports: [TypeOrmModule.forFeature([UserEntity]), PassportModule],
-  providers: [AuthService, LocalStorage, JwtStorage],
-  exports: [LocalStorage],
+  imports: [TypeOrmModule.forFeature([UserEntity]), PassportModule, jwtModule],
+  providers: [AuthService, LocalStorage, JwtStorage, UserService],
+  exports: [LocalStorage, JwtStorage],
 })
 export class AuthModule {}
