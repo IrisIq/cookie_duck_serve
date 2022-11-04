@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, forwardRef } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
@@ -25,9 +25,9 @@ const jwtModule = JwtModule.registerAsync({
     TypeOrmModule.forFeature([UserEntity]),
     PassportModule,
     jwtModule,
-    UserModule,
+    forwardRef(() => UserModule),
   ],
   providers: [AuthService, LocalStorage, JwtStorage],
-  exports: [LocalStorage, JwtStorage],
+  exports: [LocalStorage, JwtStorage, AuthModule],
 })
 export class AuthModule {}
