@@ -13,7 +13,7 @@ export class UserService {
     private userRepository: Repository<UserEntity>,
   ) {}
 
-  // 注册
+  // 注册  完成
   async register(createUser: CreateUserDto) {
     const { username, email, password } = createUser;
 
@@ -45,7 +45,11 @@ export class UserService {
     return account;
   }
 
-  async getUser(id) {
-    return '这里是auth服务引用的';
+  // 查询id 用户
+  async findOne(id) {
+    const user = await this.userRepository.findOne(id);
+    console.log(user);
+
+    return user;
   }
 }

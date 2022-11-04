@@ -1,25 +1,22 @@
 import { UserEntity } from 'src/user/entities/user.entity';
 import { UserService } from 'src/user/user.service';
-import { JwtStorage } from './jwt.strategy';
+import { JwtService } from '@nestjs/jwt';
 
-import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class AuthService {
   constructor(
-    @InjectRepository(UserEntity)
-    private userRepository: Repository<UserEntity>,
     private userService: UserService,
+    private jwtService: JwtService,
   ) {}
 
   // 生成token
-  // createToken(user: Partial<UserEntity>) {
-  //   return this.userRepository.sign(user);
-  // }
+  createToken(user: Partial<UserEntity>) {
+    return this.jwtService.sign(user);
+  }
 
   async getUser(user) {
-    return await this.userService.getUser(user.id);
+    return await this.userService.findOne(user.id);
   }
 }

@@ -11,7 +11,6 @@ import { UserService } from './user.service';
   imports: [TypeOrmModule.forFeature([UserEntity]), PassportModule],
   controllers: [UserController],
   providers: [UserService, LocalStorage],
-  // providers: [UserService],
 
   exports: [UserService, UserModule],
 })
