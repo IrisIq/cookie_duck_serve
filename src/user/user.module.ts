@@ -7,6 +7,7 @@ import { UserEntity } from './entities/user.entity';
 import { UserController } from './user.controller';
 import { UserService } from './user.service';
 import { AuthModule } from 'src/auth/auth.module';
+import { AuthService } from 'src/auth/auth.service';
 
 @Module({
   imports: [
@@ -15,7 +16,8 @@ import { AuthModule } from 'src/auth/auth.module';
     forwardRef(() => AuthModule),
   ],
   controllers: [UserController],
-  providers: [UserService, LocalStorage],
+  providers: [UserService, LocalStorage, AuthService],
+  // 需要引入AuthService？？？不明
 
   exports: [UserService, UserModule],
 })

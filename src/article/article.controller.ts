@@ -37,6 +37,8 @@ export class ArticleController {
   @ApiOperation({ summary: '获取所有文章' })
   @Get()
   async findAll(@Query() query): Promise<ArticleRo> {
+    console.log(query);
+
     return await this.articleService.findAll(query);
   }
 

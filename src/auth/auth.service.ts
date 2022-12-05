@@ -2,11 +2,17 @@ import { UserEntity } from 'src/user/entities/user.entity';
 import { UserService } from 'src/user/user.service';
 import { JwtService } from '@nestjs/jwt';
 
-import { Injectable } from '@nestjs/common';
-
+import {
+  Injectable,
+  HttpException,
+  HttpStatus,
+  forwardRef,
+  Inject,
+} from '@nestjs/common';
 @Injectable()
 export class AuthService {
   constructor(
+    @Inject(forwardRef(() => UserService))
     private userService: UserService,
     private jwtService: JwtService,
   ) {}
@@ -16,7 +22,7 @@ export class AuthService {
     return this.jwtService.sign(user);
   }
 
-  async getUser(user) {
+  async getUser(user: UserEntity) {
     return await this.userService.findOne(user.id);
   }
 }

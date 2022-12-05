@@ -1,8 +1,15 @@
 import { UserEntity } from './entities/user.entity';
-import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
+import {
+  Injectable,
+  HttpException,
+  HttpStatus,
+  forwardRef,
+  Inject,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateUserDto, LoginrDto } from './dto/user.dto';
 import { Repository } from 'typeorm';
+import { AuthService } from 'src/auth/auth.service';
 
 import * as bcrypt from 'bcryptjs';
 
@@ -11,6 +18,8 @@ export class UserService {
   constructor(
     @InjectRepository(UserEntity)
     private userRepository: Repository<UserEntity>,
+    @Inject(forwardRef(() => AuthService))
+    private authService: AuthService,
   ) {}
 
   // 注册  完成
@@ -41,15 +50,26 @@ export class UserService {
 
   // 登陆
   async login(account: Partial<UserEntity>) {
-    // console.log(1, account);
-    return account;
+    const token = this.authService.createToken({
+      id: account.id,
+      username: account.username,
+      role: account.role,
+    });
+    console.log(token);
+
+    return { token };
   }
 
   // 查询id 用户
   async findOne(id) {
-    const user = await this.userRepository.findOne(id);
-    console.log(user);
+    console.log(id);
+    // const user = await this.userRepository.findOne(id);
+    const users = await this.userRepository
+      .createQueryBuilder('user')
+      .where('user.id=:id', { id })
+      .getOne();
 
-    return user;
+    // console.log(users);
+    return users;
   }
 }

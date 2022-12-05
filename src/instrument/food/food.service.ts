@@ -18,4 +18,19 @@ export class FoodService {
 
     return this.FoodRepository.save(post);
   }
+
+  // 获取食物
+  async getFood(type) {
+    let foods = null;
+    if (type.type) {
+      foods = await this.FoodRepository.createQueryBuilder('foods')
+        .where('foods.food_type=:type', type)
+        .getMany();
+    } else {
+      foods = await this.FoodRepository.createQueryBuilder('foods').getMany();
+    }
+    console.log(foods);
+
+    return foods;
+  }
 }

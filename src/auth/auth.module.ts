@@ -28,6 +28,8 @@ const jwtModule = JwtModule.registerAsync({
     forwardRef(() => UserModule),
   ],
   providers: [AuthService, LocalStorage, JwtStorage],
-  exports: [LocalStorage, JwtStorage, AuthModule],
+  exports: [AuthModule, jwtModule],
 })
-export class AuthModule {}
+export class AuthModule {
+  // constructor(private readonly authService: AuthService) {}
+}

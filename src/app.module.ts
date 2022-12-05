@@ -12,6 +12,7 @@ import { ArticlEntity } from './article/article.entity';
 import { FoodEntity } from './instrument/food/entities/food.entity';
 import { AuthModule } from './auth/auth.module';
 import { UserEntity } from 'src/user/entities/user.entity';
+import { DicModule } from './sys/dic/dic.module';
 
 @Module({
   imports: [
@@ -38,6 +39,7 @@ import { UserEntity } from 'src/user/entities/user.entity';
     FoodModule,
     ArticleModule,
     AuthModule,
+    DicModule,
   ],
   controllers: [],
   providers: [],

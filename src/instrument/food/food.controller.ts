@@ -1,4 +1,4 @@
-import { Controller, Post, Body, HttpCode } from '@nestjs/common';
+import { Controller, Post, Body, HttpCode, Get, Query } from '@nestjs/common';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
 
 import { FoodService } from './food.service';
@@ -17,5 +17,14 @@ export class FoodController {
     console.log(data);
 
     return await this.foodService.addFood(data);
+  }
+
+  // 获取 食物
+  @ApiTags('工具/食物')
+  @ApiOperation({ summary: '获取食物' })
+  @Get()
+  async getFood(@Query() type: number) {
+    console.log(type);
+    return await this.foodService.getFood(type);
   }
 }
