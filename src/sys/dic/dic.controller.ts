@@ -1,15 +1,34 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  HttpCode,
+} from '@nestjs/common';
+import {
+  ApiTags,
+  ApiOperation,
+  ApiResponse,
+  ApiBearerAuth,
+} from '@nestjs/swagger';
 import { DicService } from './dic.service';
-import { CreateDicDto } from './dto/create-dic.dto';
+import { CreateDicTypeDto } from './dto/create-dic.dto';
 import { UpdateDicDto } from './dto/update-dic.dto';
 
-@Controller('dic')
+@ApiTags('系统/字典')
+@Controller('sys/dic')
 export class DicController {
   constructor(private readonly dicService: DicService) {}
 
-  @Post()
-  create(@Body() createDicDto: CreateDicDto) {
-    return this.dicService.create(createDicDto);
+  @Post('creatType')
+  @HttpCode(200)
+  createDicType(@Body() createDicTypeDto: CreateDicTypeDto) {
+    console.log(createDicTypeDto);
+
+    return this.dicService.createDicType(createDicTypeDto);
   }
 
   @Get()

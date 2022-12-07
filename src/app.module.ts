@@ -13,6 +13,7 @@ import { FoodEntity } from './instrument/food/entities/food.entity';
 import { AuthModule } from './auth/auth.module';
 import { UserEntity } from 'src/user/entities/user.entity';
 import { DicModule } from './sys/dic/dic.module';
+import { DictTypeEntity } from './sys/dic/entities/dic.type.entity';
 
 @Module({
   imports: [
@@ -30,7 +31,7 @@ import { DicModule } from './sys/dic/dic.module';
         username: configService.get('DB_USER', 'root'),
         password: configService.get('DB_PASSWORD', '123456789'),
         database: configService.get('DB_DATABASE', 'cookieDuck'),
-        entities: [ArticlEntity, FoodEntity, UserEntity],
+        entities: [ArticlEntity, FoodEntity, UserEntity, DictTypeEntity],
         timezone: '+08:00', //服务器上配置的时区
         synchronize: false, //根据实体自动创建数据库表， 生产环境建议关闭
       }),

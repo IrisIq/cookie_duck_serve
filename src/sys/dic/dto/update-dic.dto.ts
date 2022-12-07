@@ -1,4 +1,4 @@
 import { PartialType } from '@nestjs/swagger';
-import { CreateDicDto } from './create-dic.dto';
+import { CreateDicTypeDto } from './create-dic.dto';
 
-export class UpdateDicDto extends PartialType(CreateDicDto) {}
+export class UpdateDicDto extends PartialType(CreateDicTypeDto) {}
