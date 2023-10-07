@@ -17,6 +17,8 @@ export class ArticleService {
   // 创建文章
   async create(post: Partial<ArticlEntity>): Promise<ArticlEntity> {
     const { title } = post;
+    console.log(post);
+
     if (!title) {
       throw new HttpException('缺少文章标题', 401);
     }
@@ -36,7 +38,9 @@ export class ArticleService {
     qb.orderBy('articl.create_time', 'DESC');
 
     const count = await qb.getCount();
-    const { pageNum = 1, pageSize = 10, ...params } = query;
+    console.log(1111111, query);
+
+    const { pageNum = 1, pageSize = 10 } = query;
     qb.limit(pageSize);
     qb.offset(pageSize * (pageNum - 1));
 
@@ -48,7 +52,14 @@ export class ArticleService {
 
   // 获取指定文章
   async findById(id): Promise<ArticlEntity> {
-    return await this.articlesRepository.findOne(id);
+    return await this.articlesRepository.findOne({
+      where: {
+        id,
+      },
+      order: {
+        id: 'DESC',
+      },
+    });
   }
 
   // 更新文章

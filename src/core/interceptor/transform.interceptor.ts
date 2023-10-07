@@ -21,7 +21,7 @@ export class TransformInterceptor implements NestInterceptor {
           data,
           code: 1,
           msg: '请求成功',
-          succes: true,
+          success: true,
         };
       }),
     );

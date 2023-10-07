@@ -1,5 +1,5 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsNotEmpty, IsNumber } from 'class-validator';
 
 export class CreatePostDto {
   @ApiProperty({ description: '文章标题' })
@@ -15,7 +15,10 @@ export class CreatePostDto {
   @ApiPropertyOptional({ description: '封面' })
   readonly img_url: string;
 
-  @IsNumber()
+  // @IsNumber()
   @ApiProperty({ description: '文章类型' })
   readonly type: number;
+
+  @ApiProperty({ description: '文章类型' })
+  readonly is_show: boolean;
 }

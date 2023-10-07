@@ -4,16 +4,16 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
   CreateDateColumn,
-  PrimaryColumn,
-  BeforeInsert,
   OneToMany,
 } from 'typeorm';
-import { Exclude } from 'class-transformer';
-import { ApiProperty } from '@nestjs/swagger';
+import { DictItemEntity } from './dic.item.entity';
+// import { Exclude } from 'class-transformer';
+// import { ApiProperty } from '@nestjs/swagger';
 
-@Entity('sys_dict_item')
+@Entity('sys_dict_type')
 export class DictTypeEntity {
   @PrimaryGeneratedColumn({ name: 'dic_id' })
+  @OneToMany(() => DictItemEntity, (dictItemEntity) => dictItemEntity.dicId)
   dicId: number;
 
   // dic_name
@@ -34,6 +34,7 @@ export class DictTypeEntity {
     comment: '使用状态 1:使用，0:删除',
   })
   dicStatus: string;
+
   @Column({ name: 'create_by', comment: '创建人' })
   createBy: string;
 

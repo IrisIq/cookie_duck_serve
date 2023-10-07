@@ -26,6 +26,7 @@ export class ArticleController {
   @HttpCode(200)
   @Post()
   async create(@Body() post: CreatePostDto) {
+    console.log(post);
     return await this.articleService.create(post);
   }
 
@@ -48,9 +49,14 @@ export class ArticleController {
    */
   @ApiTags('文章')
   @ApiOperation({ summary: '获取指定文章' })
-  @Get(':id')
+  @Get('/:id')
   async findById(@Param('id') id) {
-    return await this.articleService.findById(id);
+    console.log(id);
+    const articleList = await this.articleService.findById(id);
+    // console.log(res);
+    articleList.is_show = articleList.is_show ? true : false;
+
+    return articleList;
   }
 
   /**

@@ -28,4 +28,7 @@ export class ArticlEntity {
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   update_time: Date;
+
+  @Column({ type: 'tinyint', default: 1 })
+  is_show: boolean;
 }

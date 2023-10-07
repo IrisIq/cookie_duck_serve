@@ -14,6 +14,7 @@ import { AuthModule } from './auth/auth.module';
 import { UserEntity } from 'src/user/entities/user.entity';
 import { DicModule } from './sys/dic/dic.module';
 import { DictTypeEntity } from './sys/dic/entities/dic.type.entity';
+import { DictItemEntity } from './sys/dic/entities/dic.item.entity';
 
 @Module({
   imports: [
@@ -31,7 +32,13 @@ import { DictTypeEntity } from './sys/dic/entities/dic.type.entity';
         username: configService.get('DB_USER', 'root'),
         password: configService.get('DB_PASSWORD', '123456789'),
         database: configService.get('DB_DATABASE', 'cookieDuck'),
-        entities: [ArticlEntity, FoodEntity, UserEntity, DictTypeEntity],
+        entities: [
+          ArticlEntity,
+          FoodEntity,
+          UserEntity,
+          DictTypeEntity,
+          DictItemEntity,
+        ],
         timezone: '+08:00', //服务器上配置的时区
         synchronize: false, //根据实体自动创建数据库表， 生产环境建议关闭
       }),
