@@ -25,23 +25,26 @@ import { DictItemEntity } from './sys/dic/entities/dic.item.entity';
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
-      useFactory: async (configService: ConfigService) => ({
-        type: 'mysql',
-        host: configService.get('DB_HOST', 'localhost'),
-        port: configService.get<number>('DB_PORT', 3306),
-        username: configService.get('DB_USER', 'root'),
-        password: configService.get('DB_PASSWORD', '123456789'),
-        database: configService.get('DB_DATABASE', 'cookieDuck'),
-        entities: [
-          ArticlEntity,
-          FoodEntity,
-          UserEntity,
-          DictTypeEntity,
-          DictItemEntity,
-        ],
-        timezone: '+08:00', //服务器上配置的时区
-        synchronize: false, //根据实体自动创建数据库表， 生产环境建议关闭
-      }),
+      useFactory: async (configService: ConfigService) => {
+        console.log(configService.get('DB_PASSWORD'), 111111);
+        return {
+          type: 'mysql',
+          host: configService.get('DB_HOST', 'localhost'),
+          port: configService.get<number>('DB_PORT', 3306),
+          username: configService.get('DB_USER', 'root'),
+          password: configService.get('DB_PASSWORD', '123456789'),
+          database: configService.get('DB_DATABASE', 'cookieDuck'),
+          entities: [
+            ArticlEntity,
+            FoodEntity,
+            UserEntity,
+            DictTypeEntity,
+            DictItemEntity,
+          ],
+          timezone: '+08:00', //服务器上配置的时区
+          synchronize: false, //根据实体自动创建数据库表， 生产环境建议关闭
+        };
+      },
     }),
     UserModule,
     FoodModule,

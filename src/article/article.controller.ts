@@ -66,7 +66,7 @@ export class ArticleController {
    */
   @ApiTags('文章')
   @ApiOperation({ summary: '更新文章' })
-  @Put(':id')
+  @Put('/:id')
   async update(@Param('id') id, @Body() post) {
     return await this.articleService.updateById(id, post);
   }

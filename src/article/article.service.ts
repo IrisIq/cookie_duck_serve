@@ -1,5 +1,6 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+
 import { Repository } from 'typeorm';
 import { ArticlEntity } from './article.entity';
 
@@ -63,13 +64,26 @@ export class ArticleService {
   }
 
   // 更新文章
-  async updateById(id, post): Promise<ArticlEntity> {
-    const existPost = await this.articlesRepository.findOne(id);
-    if (!existPost) {
-      throw new HttpException(`id为${id}的文章不存在`, 401);
-    }
-    const updatePost = this.articlesRepository.merge(existPost, post);
-    return this.articlesRepository.save(updatePost);
+  async updateById(id, post): Promise<any> {
+    console.log(id, post, 1111111);
+
+    const existPost = await this.articlesRepository
+      .createQueryBuilder()
+      .update()
+      .set(post)
+      .where('id = :id', { id })
+      .execute();
+    console.log(existPost);
+
+    // const existPost = await this.articlesRepository.findOne(id);
+    // if (!existPost) {
+    //   throw new HttpException(`id为${id}的文章不存在`, 401);
+    // }
+    // const updatePost = this.articlesRepository.merge(existPost, post);
+    // this.articlesRepository.save(updatePost);
+    // const data = await this.articlesRepository;
+
+    return existPost;
   }
 
   // 刪除文章

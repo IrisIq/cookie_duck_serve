@@ -15,7 +15,6 @@ export class DicController {
     console.log(createDicTypeDto);
     return this.dicService.createDicType(createDicTypeDto);
   }
-
   @Post('creatItem')
   @HttpCode(200)
   createDicItem(@Body() createDicItemDto: CreateDicItemDto) {
