@@ -23,8 +23,16 @@ export class FoodController {
   @ApiTags('工具/食物')
   @ApiOperation({ summary: '获取食物' })
   @Get()
-  async getFood(@Query() type: number) {
-    console.log(type);
-    return await this.foodService.getFood(type);
+  async getFood(@Query() type) {
+    console.log(type, 11111111);
+    return await this.foodService.getFood(type.type);
+  }
+
+  // 获取 食物
+  @ApiTags('工具/食物')
+  @ApiOperation({ summary: '获取食物分类' })
+  @Get('getType')
+  async getFoodType() {
+    return await this.foodService.getFoodType();
   }
 }

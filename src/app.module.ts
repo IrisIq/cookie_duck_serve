@@ -1,3 +1,10 @@
+/*
+ * @Author: IrisIq
+ * @Date: 2022-09-27 17:02:14
+ * @LastEditors: IrisIq
+ * @LastEditTime: 2024-05-31 15:46:40
+ * @Description: content
+ */
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -10,6 +17,7 @@ import { ArticleModule } from './article/article.module';
 
 import { ArticlEntity } from './article/article.entity';
 import { FoodEntity } from './instrument/food/entities/food.entity';
+import { FoodTypeEntity } from './instrument/food/entities/type.entity';
 import { AuthModule } from './auth/auth.module';
 import { UserEntity } from 'src/user/entities/user.entity';
 import { DicModule } from './sys/dic/dic.module';
@@ -26,7 +34,7 @@ import { DictItemEntity } from './sys/dic/entities/dic.item.entity';
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: async (configService: ConfigService) => {
-        console.log(configService.get('DB_PASSWORD'), 111111);
+        console.log(configService.get('NODE_ENV'), 111111);
         return {
           type: 'mysql',
           host: configService.get('DB_HOST', 'localhost'),
@@ -40,9 +48,10 @@ import { DictItemEntity } from './sys/dic/entities/dic.item.entity';
             UserEntity,
             DictTypeEntity,
             DictItemEntity,
+            FoodTypeEntity,
           ],
           timezone: '+08:00', //服务器上配置的时区
-          synchronize: false, //根据实体自动创建数据库表， 生产环境建议关闭
+          synchronize: configService.get('NODE_ENV') === 'dev', //根据实体自动创建数据库表， 生产环境建议关闭
         };
       },
     }),

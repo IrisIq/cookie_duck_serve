@@ -1,9 +1,17 @@
-import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+/*
+ * @Author: IrisIq
+ * @Date: 2022-10-18 15:01:19
+ * @LastEditors: IrisIq
+ * @LastEditTime: 2024-05-31 17:54:37
+ * @Description: content
+ */
+import { ApiProperty } from '@nestjs/swagger';
+import { IsNotEmpty } from 'class-validator';
+import { FoodTypeEntity } from '../entities/type.entity';
 
 export class Food {
   @ApiProperty({ description: '食物分类' })
-  food_type: number; // 食物分类
+  food_type: FoodTypeEntity; // 食物分类
 
   @ApiProperty({ description: '食物名称' })
   @IsNotEmpty({ message: '食物名称必填' })

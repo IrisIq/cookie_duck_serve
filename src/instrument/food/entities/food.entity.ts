@@ -1,14 +1,27 @@
-import { Column, Entity, PrimaryGeneratedColumn, BeforeInsert } from 'typeorm';
-import * as bcrypt from 'bcryptjs';
-
+/*
+ * @Author: IrisIq
+ * @Date: 2022-10-10 13:45:30
+ * @LastEditors: IrisIq
+ * @LastEditTime: 2024-05-31 16:19:14
+ * @Description: content
+ */
+import {
+  Column,
+  Entity,
+  PrimaryGeneratedColumn,
+  JoinColumn,
+  OneToOne,
+} from 'typeorm';
+import { FoodTypeEntity } from './type.entity';
 @Entity('foods')
 export class FoodEntity {
   //'uuid'
   @PrimaryGeneratedColumn()
   food_id: number;
 
-  @Column({ type: 'tinyint', default: 0, comment: '分类:0 未分类 ' })
-  food_type: number; // 食物分类
+  @OneToOne(() => FoodTypeEntity)
+  @JoinColumn()
+  food_type: FoodTypeEntity; // 食物分类
 
   @Column({ length: 60, comment: '名称' })
   food_name: string; // 食物名称
