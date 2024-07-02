@@ -1,3 +1,10 @@
+/*
+ * @Author: IrisIq
+ * @Date: 2022-09-21 13:05:27
+ * @LastEditors: IrisIq
+ * @LastEditTime: 2024-06-07 15:29:23
+ * @Description: content
+ */
 import { ArticleService, ArticleRo } from './article.service';
 import {
   Body,
@@ -39,7 +46,6 @@ export class ArticleController {
   @Get()
   async findAll(@Query() query): Promise<ArticleRo> {
     console.log(query);
-
     return await this.articleService.findAll(query);
   }
 

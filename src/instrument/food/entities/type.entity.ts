@@ -2,14 +2,15 @@
  * @Author: IrisIq
  * @Date: 2024-05-30 17:13:24
  * @LastEditors: IrisIq
- * @LastEditTime: 2024-05-31 16:19:22
  * @Description: content
+ * @LastEditTime: 2024-06-11 10:42:37
  */
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-
-@Entity('foods_type')
+import { Column, Entity, PrimaryGeneratedColumn, OneToOne } from 'typeorm';
+import { FoodEntity } from './food.entity';
+@Entity('food_type')
 export class FoodTypeEntity {
   //'uuid'
+  //   @OneToOne(() => FoodEntity)
   @PrimaryGeneratedColumn()
   food_type_id: number;
 

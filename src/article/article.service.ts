@@ -39,7 +39,6 @@ export class ArticleService {
     qb.orderBy('articl.create_time', 'DESC');
 
     const count = await qb.getCount();
-    console.log(1111111, query);
 
     const { pageNum = 1, pageSize = 10 } = query;
     qb.limit(pageSize);
@@ -65,8 +64,6 @@ export class ArticleService {
 
   // 更新文章
   async updateById(id, post): Promise<any> {
-    console.log(id, post, 1111111);
-
     const existPost = await this.articlesRepository
       .createQueryBuilder()
       .update()

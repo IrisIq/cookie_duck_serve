@@ -2,7 +2,7 @@
  * @Author: IrisIq
  * @Date: 2022-09-21 10:53:46
  * @LastEditors: IrisIq
- * @LastEditTime: 2024-05-31 16:21:17
+ * @LastEditTime: 2024-06-11 10:04:40
  * @Description: content
  */
 import { Injectable } from '@nestjs/common';
@@ -23,23 +23,22 @@ export class FoodService {
 
   // 添加
   async addFood(post: Partial<FoodEntity>) {
-    console.log(post);
-    console.log(this.FoodRepository);
-
     return this.FoodRepository.save(post);
   }
 
   // 获取食物
   async getFood(type) {
     let foods = null;
-    if (type.type) {
+    if (type) {
+      console.log(type);
+
       foods = await this.FoodRepository.createQueryBuilder('foods')
         .where('foods.food_type=:type', type)
         .getMany();
+      // foods = await this.FoodRepository.find({ relations: ['photos'] });
     } else {
       foods = await this.FoodRepository.createQueryBuilder('foods').getMany();
     }
-    console.log(foods);
 
     return foods;
   }
@@ -47,7 +46,6 @@ export class FoodService {
   // 获取食物分类
   async getFoodType() {
     const type = await this.FoodTypeEntity.createQueryBuilder().getMany();
-    console.log(type);
     return type;
   }
 }

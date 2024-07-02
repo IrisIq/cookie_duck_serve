@@ -2,7 +2,7 @@
  * @Author: IrisIq
  * @Date: 2022-09-21 10:27:11
  * @LastEditors: IrisIq
- * @LastEditTime: 2024-05-30 17:23:54
+ * @LastEditTime: 2024-06-11 09:49:27
  * @Description: content
  */
 import { Module } from '@nestjs/common';

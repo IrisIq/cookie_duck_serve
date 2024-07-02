@@ -1,3 +1,10 @@
+/*
+ * @Author: IrisIq
+ * @Date: 2022-09-27 17:27:42
+ * @LastEditors: IrisIq
+ * @LastEditTime: 2024-06-07 15:27:31
+ * @Description: content
+ */
 // 全局 成功拦截器
 import {
   CallHandler,
@@ -15,8 +22,6 @@ export class TransformInterceptor implements NestInterceptor {
 
     return next.handle().pipe(
       map((data) => {
-        console.log('map', data);
-
         return {
           data,
           code: 1,

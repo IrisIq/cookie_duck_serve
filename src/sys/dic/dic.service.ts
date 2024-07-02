@@ -18,13 +18,11 @@ export class DicService {
 
   // 创建字典
   async createDicType(dic: Partial<CreateDicTypeDto>) {
-    console.log(dic);
     return this.dictTypeEntity.save(dic);
   }
 
   // 创建字典 内容
   async createDicItem(dic: Partial<CreateDicItemDto>) {
-    console.log(dic);
     return this.dicItemEntity.save(dic);
   }
 }

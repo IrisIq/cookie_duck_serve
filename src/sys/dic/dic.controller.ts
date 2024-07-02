@@ -1,3 +1,10 @@
+/*
+ * @Author: IrisIq
+ * @Date: 2022-12-05 17:41:11
+ * @LastEditors: IrisIq
+ * @LastEditTime: 2024-06-07 15:26:57
+ * @Description: content
+ */
 import { Controller, Post, Body, HttpCode } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { DicService } from './dic.service';
@@ -12,13 +19,11 @@ export class DicController {
   @Post('creatType')
   @HttpCode(200)
   createDicType(@Body() createDicTypeDto: CreateDicTypeDto) {
-    console.log(createDicTypeDto);
     return this.dicService.createDicType(createDicTypeDto);
   }
   @Post('creatItem')
   @HttpCode(200)
   createDicItem(@Body() createDicItemDto: CreateDicItemDto) {
-    console.log(createDicItemDto);
     return this.dicService.createDicItem(createDicItemDto);
   }
 }

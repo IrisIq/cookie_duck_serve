@@ -2,7 +2,7 @@
  * @Author: IrisIq
  * @Date: 2022-09-27 17:02:14
  * @LastEditors: IrisIq
- * @LastEditTime: 2024-05-31 15:46:40
+ * @LastEditTime: 2024-06-07 15:28:01
  * @Description: content
  */
 import { Module } from '@nestjs/common';
@@ -34,7 +34,6 @@ import { DictItemEntity } from './sys/dic/entities/dic.item.entity';
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: async (configService: ConfigService) => {
-        console.log(configService.get('NODE_ENV'), 111111);
         return {
           type: 'mysql',
           host: configService.get('DB_HOST', 'localhost'),

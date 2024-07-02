@@ -2,26 +2,26 @@
  * @Author: IrisIq
  * @Date: 2022-10-10 13:45:30
  * @LastEditors: IrisIq
- * @LastEditTime: 2024-05-31 16:19:14
+ * @LastEditTime: 2024-06-11 09:52:40
  * @Description: content
  */
 import {
   Column,
   Entity,
   PrimaryGeneratedColumn,
+  ManyToOne,
   JoinColumn,
-  OneToOne,
 } from 'typeorm';
 import { FoodTypeEntity } from './type.entity';
-@Entity('foods')
+@Entity('food_values')
 export class FoodEntity {
   //'uuid'
   @PrimaryGeneratedColumn()
   food_id: number;
 
-  @OneToOne(() => FoodTypeEntity)
-  @JoinColumn()
-  food_type: FoodTypeEntity; // 食物分类
+  @ManyToOne(() => FoodTypeEntity, ({ food_type_id }) => food_type_id)
+  @JoinColumn({ name: 'food_type' })
+  food_type; // 食物分类
 
   @Column({ length: 60, comment: '名称' })
   food_name: string; // 食物名称

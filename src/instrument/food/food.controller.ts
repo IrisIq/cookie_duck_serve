@@ -14,8 +14,6 @@ export class FoodController {
   @HttpCode(200)
   @Post()
   async addFood(@Body() data: Food) {
-    console.log(data);
-
     return await this.foodService.addFood(data);
   }
 
@@ -24,8 +22,7 @@ export class FoodController {
   @ApiOperation({ summary: '获取食物' })
   @Get()
   async getFood(@Query() type) {
-    console.log(type, 11111111);
-    return await this.foodService.getFood(type.type);
+    return await this.foodService.getFood(type);
   }
 
   // 获取 食物
